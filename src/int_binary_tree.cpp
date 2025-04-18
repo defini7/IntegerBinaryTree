@@ -1,12 +1,7 @@
 #include "int_binary_tree.hpp"
 
-Node::Node(int value, Node* left, Node* right)
+IntBinaryTree::IntBinaryTree(int value = 0, IntBinaryTree* left = nullptr, IntBinaryTree* right = nullptr)
     : value(value), left(left), right(right)
-{
-}
-
-IntBinaryTree::IntBinaryTree(int value)
-    : m_root(new Node(value))
 {
 }
 
@@ -70,7 +65,7 @@ void IntBinaryTree::remove(int value)
     // TODO: Удаление элементов с конкретным значением
 }
 
-Node*** IntBinaryTree::traverse_levels(size_t& levels_count)
+IntBinaryTree*** IntBinaryTree::traverse_levels(size_t& levels_count)
 {
     // TODO: Обход дерева по уровням; кажется, нужно использовать BFS (Breadth First Search)
     // (из метода возвращается массив с уровнями с указателями на узлы (не нужно создавать копии узлов),
@@ -105,5 +100,17 @@ IntBinaryTree IntBinaryTree::operator++(int)
 IntBinaryTree& IntBinaryTree::operator++()
 {
     // TODO: Увеличить значения всех узлов в дереве на 1 (префиксный вариант)
+    return *this;
+}
+
+IntBinaryTree IntBinaryTree::operator--(int)
+{
+    // TODO: Уменьшить значения всех узлов в дереве на 1 (постфиксный вариант)
+    return IntBinaryTree();
+}
+
+IntBinaryTree& IntBinaryTree::operator--()
+{
+    // TODO: Уменьшить значения всех узлов в дереве на 1 (префиксный вариант)
     return *this;
 }
