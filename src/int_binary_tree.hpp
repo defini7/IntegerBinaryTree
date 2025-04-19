@@ -29,9 +29,6 @@ public:
     IntBinaryTree operator++(int);
     IntBinaryTree& operator++();
 
-    IntBinaryTree operator--(int);
-    IntBinaryTree& operator--();
-
 public:
     int value;
 

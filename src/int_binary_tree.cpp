@@ -17,7 +17,7 @@ IntBinaryTree::~IntBinaryTree()
 
 IntBinaryTree& IntBinaryTree::operator=(const IntBinaryTree& rhs)
 {
-    // TODO: Копирование из rhs в this (нужен clear)
+    // TODO: Копирование из rhs в this (нужен copy)
     return *this;
 }
 
@@ -100,17 +100,5 @@ IntBinaryTree IntBinaryTree::operator++(int)
 IntBinaryTree& IntBinaryTree::operator++()
 {
     // TODO: Увеличить значения всех узлов в дереве на 1 (префиксный вариант)
-    return *this;
-}
-
-IntBinaryTree IntBinaryTree::operator--(int)
-{
-    // TODO: Уменьшить значения всех узлов в дереве на 1 (постфиксный вариант)
-    return IntBinaryTree();
-}
-
-IntBinaryTree& IntBinaryTree::operator--()
-{
-    // TODO: Уменьшить значения всех узлов в дереве на 1 (префиксный вариант)
     return *this;
 }
