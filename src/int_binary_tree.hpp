@@ -1,6 +1,8 @@
 #ifndef BINARY_TREE_HPP
 #define BINARY_TREE_HPP
 
+#include <iostream>
+
 // Главный класс (является и узлом, и деревом)
 class IntBinaryTree
 {
@@ -26,12 +28,12 @@ public:
     void print();
     void clear();
     
-    int* traverse_preorder(size_t& elements_count);
-    int* traverse_inorder(size_t& elements_count);
-    int* traverse_postorder(size_t& elements_count);
+    void traverse_preorder();
+    void traverse_inorder();
+    void traverse_postorder();
+    void traverse_levels();
 
     void remove(int value);
-    IntBinaryTree*** traverse_levels(size_t& levels_count);
 
     void copy(const IntBinaryTree& tree);
     size_t get_height();
@@ -42,6 +44,9 @@ public:
 
 public:
     Node* root = nullptr;
+
+private:
+    bool print_level(Node* root, size_t level);
 
 };
 

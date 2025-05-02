@@ -1,7 +1,7 @@
 ﻿#include "int_binary_tree.hpp"
 
 #include <random>
-#include <iostream>
+#include <chrono>
 
 void print_sorted(IntBinaryTree::Node* node)
 {
@@ -23,7 +23,7 @@ int main()
 
     IntBinaryTree t;
 
-    std::mt19937 mt;
+    std::mt19937 mt/*(std::chrono::system_clock::now().time_since_epoch().count())*/;
     std::uniform_int_distribution<> dist(0, 20);
 
     std::cout << "Вставка: ";
@@ -37,5 +37,8 @@ int main()
 
     std::cout << std::endl;
     print_sorted(t.root);
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
+
+    std::cout << "Обход по уровням:\n";
+    t.traverse_levels();
 }

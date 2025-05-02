@@ -1,5 +1,7 @@
 #include "int_binary_tree.hpp"
 
+#include <cmath>
+
 IntBinaryTree::Node::Node(int value, Node* left, Node* right)
     : value(value), left(left), right(right)
 {
@@ -34,25 +36,14 @@ void IntBinaryTree::push(int value)
 
     while (node)
     {
-        if (value <= node->value)
-        {
-            if (node->left)
-                node = node->left;
-            else
-            {
-                node->left = new Node(value);
-                node = nullptr;
-            }
-        }
+        Node*& test_node = (value <= node->value) ? node->left : node->right;
+
+        if (test_node)
+            node = test_node;
         else
         {
-            if (node->right)
-                node = node->right;
-            else
-            {
-                node->right = new Node(value);
-                node = nullptr;
-            }
+            test_node = new Node(value);
+            node = nullptr;
         }
     }
 }
@@ -67,28 +58,19 @@ void IntBinaryTree::clear()
     // TODO: Полное очищение дерева
 }
 
-int* IntBinaryTree::traverse_preorder(size_t& elements_count)
+void IntBinaryTree::traverse_preorder()
 {
     // TODO: Предварительный обход
-    // (возвращается массив int значений в нужном порядке,
-    // в elements_count сохраняется их кол-во)
-    return nullptr;
 }
 
-int* IntBinaryTree::traverse_inorder(size_t& elements_count)
+void IntBinaryTree::traverse_inorder()
 {
     // TODO: Порядковый обход
-    // (возвращается массив int значений в нужном порядке,
-    // в elements_count сохраняется их кол-во)
-    return nullptr;
 }
 
-int* IntBinaryTree::traverse_postorder(size_t& elements_count)
+void IntBinaryTree::traverse_postorder()
 {
     // TODO: Отложенный обход
-    // (возвращается массив int значений в нужном порядке,
-    // в elements_count сохраняется их кол-во)
-    return nullptr;
 }
 
 void IntBinaryTree::remove(int value)
@@ -96,9 +78,12 @@ void IntBinaryTree::remove(int value)
     // TODO: Удаление элементов с конкретным значением
 }
 
-IntBinaryTree*** IntBinaryTree::traverse_levels(size_t& levels_count)
+void IntBinaryTree::traverse_levels()
 {
-    return nullptr;
+    size_t l = 1;
+
+    while (print_level(root, l++))
+        std::cout << std::endl;
 }
 
 void IntBinaryTree::copy(const IntBinaryTree& tree)
@@ -129,4 +114,21 @@ IntBinaryTree& IntBinaryTree::operator++()
 {
     // TODO: Увеличить значения всех узлов в дереве на 1 (префиксный вариант)
     return *this;
+}
+
+bool IntBinaryTree::print_level(Node* root, size_t level)
+{
+    if (!root)
+        return false;
+
+    if (level == 1)
+    {
+        std::cout << root->value << ' ';
+        return true;
+    }
+
+    bool left = print_level(root->left, level - 1);
+    bool right = print_level(root->right, level - 1);
+    
+    return left || right;
 }
