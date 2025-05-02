@@ -5,13 +5,24 @@
 class IntBinaryTree
 {
 public:
-    IntBinaryTree(int value = 0, IntBinaryTree* left = nullptr, IntBinaryTree* right = nullptr);
+    struct Node
+    {
+        Node(int value, Node* left = nullptr, Node* right = nullptr);
+
+        int value;
+
+        Node* left = nullptr;
+        Node* right = nullptr;
+    };
+
+public:
+    IntBinaryTree() = default;
     IntBinaryTree(const IntBinaryTree& tree);
     ~IntBinaryTree();
 
     IntBinaryTree& operator=(const IntBinaryTree& rhs);
 
-    void add_element(int value);
+    void push(int value);
     void print();
     void clear();
     
@@ -30,10 +41,7 @@ public:
     IntBinaryTree& operator++();
 
 public:
-    int value;
-
-    IntBinaryTree* left;
-    IntBinaryTree* right;
+    Node* root = nullptr;
 
 };
 

@@ -1,8 +1,9 @@
 #include "int_binary_tree.hpp"
 
-IntBinaryTree::IntBinaryTree(int value = 0, IntBinaryTree* left = nullptr, IntBinaryTree* right = nullptr)
+IntBinaryTree::Node::Node(int value, Node* left, Node* right)
     : value(value), left(left), right(right)
 {
+
 }
 
 IntBinaryTree::IntBinaryTree(const IntBinaryTree& tree)
@@ -21,9 +22,39 @@ IntBinaryTree& IntBinaryTree::operator=(const IntBinaryTree& rhs)
     return *this;
 }
 
-void IntBinaryTree::add_element(int value)
+void IntBinaryTree::push(int value)
 {
-    // TODO: Добавление value в дерево
+    if (!root)
+    {
+        root = new Node(value);
+        return;
+    }
+
+    Node* node = root;
+
+    while (node)
+    {
+        if (value <= node->value)
+        {
+            if (node->left)
+                node = node->left;
+            else
+            {
+                node->left = new Node(value);
+                node = nullptr;
+            }
+        }
+        else
+        {
+            if (node->right)
+                node = node->right;
+            else
+            {
+                node->right = new Node(value);
+                node = nullptr;
+            }
+        }
+    }
 }
 
 void IntBinaryTree::print()
@@ -67,9 +98,6 @@ void IntBinaryTree::remove(int value)
 
 IntBinaryTree*** IntBinaryTree::traverse_levels(size_t& levels_count)
 {
-    // TODO: Обход дерева по уровням; кажется, нужно использовать BFS (Breadth First Search)
-    // (из метода возвращается массив с уровнями с указателями на узлы (не нужно создавать копии узлов),
-    // в levels_count сохраняется кол-во этих уровней)
     return nullptr;
 }
 
