@@ -75,7 +75,7 @@ void IntBinaryTree::traverse_postorder()
 
 void IntBinaryTree::remove(int value)
 {
-    // TODO: Удаление элементов с конкретным значением
+    remove(root, value);
 }
 
 void IntBinaryTree::traverse_levels()
@@ -98,10 +98,9 @@ size_t IntBinaryTree::get_height()
     return 0;
 }
 
-void IntBinaryTree::remove_clones()
+void IntBinaryTree::remove_duplicates()
 {
-    // TODO: убрать одинаковые значения из дерева (но оставить один из них),
-    // и после удаления элементов нужно привести дерево к правильному виду
+    remove_duplicates_impl(root);
 }
 
 IntBinaryTree IntBinaryTree::operator++(int)
@@ -116,19 +115,107 @@ IntBinaryTree& IntBinaryTree::operator++()
     return *this;
 }
 
-bool IntBinaryTree::print_level(Node* root, size_t level)
+bool IntBinaryTree::print_level(Node* node, size_t level)
 {
-    if (!root)
+    if (!node)
         return false;
 
     if (level == 1)
     {
-        std::cout << root->value << ' ';
+        std::cout << node->value << ' ';
         return true;
     }
 
-    bool left = print_level(root->left, level - 1);
-    bool right = print_level(root->right, level - 1);
+    bool left = print_level(node->left, level - 1);
+    bool right = print_level(node->right, level - 1);
     
     return left || right;
+}
+
+void IntBinaryTree::remove_duplicates_impl(Node* node)
+{
+    if (!node)
+        return;
+
+    // Проходимся по каждому значению в дереве, чтобы проверить на наличие дубликатов
+    remove_duplicates_impl(node->left);
+    remove_duplicates_impl(node->right);
+
+    // Удаляем все дубликаты и оставляем первое встретившееся значение
+    remove(node->left, node->value);
+    remove(node->right, node->value);
+}
+
+IntBinaryTree::Node* IntBinaryTree::find_leftmost(Node* start)
+{
+    // Получаем самый левый узел в текущем поддереве
+
+    while (start && start->left)
+        start = start->left;
+
+    return start;
+}
+
+bool IntBinaryTree::delete_node(Node** node, int value)
+{
+    if (!(*node))
+    {
+        // Не нашли value
+        return false;
+    }
+
+    bool removed = false;
+
+    if (value == (*node)->value)
+    {
+        // Нашли value!
+
+        Node* n = *node;
+
+        if (!n->left)
+        {
+            // Нету левого потомка => на текущий узел устанавливаем правого потомка
+            // и удаляем узел, который был раньше на данном месте
+            *node = n->right;
+            delete n;
+        }
+        else if (!n->right)
+        {
+            // То же самое, что и для отсутствия левого потомка, только тут нет правого
+            *node = n->left;
+            delete n;
+        }
+        else
+        {
+            // Есть 2 потомка, поэтому берем самый левый узел из правого потомка =>
+            // гарантия, что дерево восстановится (этот метод взят из какой-то книжки по информатике)
+
+            Node* leftmost = find_leftmost((*node)->right);
+
+            // Сохраняем его значение
+            n->value = leftmost->value;
+
+            // Удаляем leftmost узел из правого потомка
+            delete_node(&n->right, leftmost->value);
+        }
+
+        removed = true;
+    }
+    else
+    {
+        // Ищем в дереве нужное нам значение (так же как производили вставку)
+
+        if (value < (*node)->value)
+            removed = delete_node(&(*node)->left, value);
+        else
+            removed = delete_node(&(*node)->right, value);
+    }
+
+    return removed;
+}
+
+void IntBinaryTree::remove(Node*& node, int value)
+{
+    // Пытаемся удалить, пока value в дереве существует
+    while (delete_node(&node, value));
 }

@@ -34,10 +34,11 @@ public:
     void traverse_levels();
 
     void remove(int value);
+    void remove(Node*& start, int value);
 
     void copy(const IntBinaryTree& tree);
     size_t get_height();
-    void remove_clones();
+    void remove_duplicates();
 
     IntBinaryTree operator++(int);
     IntBinaryTree& operator++();
@@ -46,7 +47,11 @@ public:
     Node* root = nullptr;
 
 private:
-    bool print_level(Node* root, size_t level);
+    bool print_level(Node* node, size_t level); // для traverse_levels
+    void remove_duplicates_impl(Node* node); // для remove_duplicates
+
+    Node* find_leftmost(Node* start); // для delete_node
+    bool delete_node(Node** node, int value); // для remove и remove_duplicates
 
 };
 
