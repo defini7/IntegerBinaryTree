@@ -50,7 +50,7 @@ void IntBinaryTree::push(int value)
 
 void IntBinaryTree::print()
 {
-    // TODO: вывести дерево в консоль
+    print_helper(root, 0);
 }
 
 void IntBinaryTree::clear()
@@ -83,7 +83,7 @@ void IntBinaryTree::traverse_levels()
     size_t l = 1;
 
     while (print_level(root, l++))
-        std::cout << std::endl;
+        std::cout << '\n';
 }
 
 void IntBinaryTree::copy(const IntBinaryTree& tree)
@@ -141,6 +141,22 @@ bool IntBinaryTree::delete_node(Node** node, int value)
 {
     // TODO: искать узлы с value, чтобы удалить, начиная с node, и
     // вернуть true, если что-то удалили
+    return true;
+}
+
+void IntBinaryTree::print_helper(Node* node, int level)
+{
+    if (!node) return;
+
+    print_helper(node->right, level + 1);
+
+    for (int i = 0; i < level; ++i)
+    {
+        std::cout << "    ";
+    }
+    std::cout << node->value << std::endl;
+
+    print_helper(node->left, level + 1);
 }
 
 void IntBinaryTree::remove(Node*& node, int value)

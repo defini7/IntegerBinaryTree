@@ -17,6 +17,8 @@ public:
         Node* right = nullptr;
     };
 
+    static constexpr size_t INDENTATION_SPACES = 5;
+
 public:
     IntBinaryTree() = default;
     IntBinaryTree(const IntBinaryTree& tree);
@@ -51,6 +53,7 @@ private:
     void remove_duplicates_impl(Node* node); // для remove_duplicates
 
     bool delete_node(Node** node, int value); // для remove в remove_duplicates
+    void print_helper(Node* node, int level);
 
 };
 
