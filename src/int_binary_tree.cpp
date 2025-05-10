@@ -10,17 +10,17 @@ IntBinaryTree::Node::Node(int value, Node* left, Node* right)
 
 IntBinaryTree::IntBinaryTree(const IntBinaryTree& tree)
 {
-    // TODO: Копирование дерева из tree в this (нужен operator=)
+    // TODO: СЃРєРѕРїРёСЂРѕРІР°С‚СЊ РґРµСЂРµРІРѕ РёР· tree РІ this (РІС‹Р·РІР°С‚СЊ copy)
 }
 
 IntBinaryTree::~IntBinaryTree()
 {
-    // TODO: Вызов очистки дерева
+    // TODO: СѓРґР°Р»РёС‚СЊ РІСЃРµ СѓР·Р»С‹
 }
 
 IntBinaryTree& IntBinaryTree::operator=(const IntBinaryTree& rhs)
 {
-    // TODO: Копирование из rhs в this (нужен copy)
+    // TODO: СЃРєРѕРїРёСЂРѕРІР°С‚СЊ РёР· rhs РІ this (РІС‹Р·РІР°С‚СЊ copy)
     return *this;
 }
 
@@ -50,27 +50,27 @@ void IntBinaryTree::push(int value)
 
 void IntBinaryTree::print()
 {
-    // TODO: Печать дерева
+    // TODO: РІС‹РІРµСЃС‚Рё РґРµСЂРµРІРѕ РІ РєРѕРЅСЃРѕР»СЊ
 }
 
 void IntBinaryTree::clear()
 {
-    // TODO: Полное очищение дерева
+    // TODO: СѓРґР°Р»РёС‚СЊ РІСЃРµ СѓР·Р»С‹
 }
 
 void IntBinaryTree::traverse_preorder()
 {
-    // TODO: Предварительный обход
+    // TODO: РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅС‹Р№ РѕР±С…РѕРґ
 }
 
 void IntBinaryTree::traverse_inorder()
 {
-    // TODO: Порядковый обход
+    // TODO: РїРѕСЂСЏРґРєРѕРІС‹Р№ РѕР±С…РѕРґ
 }
 
 void IntBinaryTree::traverse_postorder()
 {
-    // TODO: Отложенный обход
+    // TODO: РѕС‚Р»РѕР¶РµРЅРЅС‹Р№ РѕР±С…РѕРґ
 }
 
 void IntBinaryTree::remove(int value)
@@ -88,13 +88,12 @@ void IntBinaryTree::traverse_levels()
 
 void IntBinaryTree::copy(const IntBinaryTree& tree)
 {
-    // TODO: Полное копирование дерева
+    // TODO: СЃРєРѕРїРёСЂРѕРІР°С‚СЊ РёР· tree РІ this
 }
 
 size_t IntBinaryTree::get_height()
 {
-    // TODO: Вычисление высоты дерева,
-    // об этом на английском: https://www.baeldung.com/cs/binary-tree-height
+    // TODO: РїРѕР»СѓС‡РёС‚СЊ РІС‹СЃРѕС‚Сѓ РґРµСЂРµРІР°
     return 0;
 }
 
@@ -105,13 +104,13 @@ void IntBinaryTree::remove_duplicates()
 
 IntBinaryTree IntBinaryTree::operator++(int)
 {
-    // TODO: Увеличить значения всех узлов в дереве на 1 (постфиксный вариант)
+    // TODO: СѓРІРµР»РёС‡РёС‚СЊ РІСЃРµ Р·РЅР°С‡РµРЅРёСЏ РІ РґРµСЂРµРІРµ РЅР° 1
     return IntBinaryTree();
 }
 
 IntBinaryTree& IntBinaryTree::operator++()
 {
-    // TODO: Увеличить значения всех узлов в дереве на 1 (префиксный вариант)
+    // TODO: СѓРІРµР»РёС‡РёС‚СЊ РІСЃРµ Р·РЅР°С‡РµРЅРёСЏ РІ РґРµСЂРµРІРµ РЅР° 1
     return *this;
 }
 
@@ -134,88 +133,18 @@ bool IntBinaryTree::print_level(Node* node, size_t level)
 
 void IntBinaryTree::remove_duplicates_impl(Node* node)
 {
-    if (!node)
-        return;
-
-    // Проходимся по каждому значению в дереве, чтобы проверить на наличие дубликатов
-    remove_duplicates_impl(node->left);
-    remove_duplicates_impl(node->right);
-
-    // Удаляем все дубликаты и оставляем первое встретившееся значение
-    remove(node->left, node->value);
-    remove(node->right, node->value);
-}
-
-IntBinaryTree::Node* IntBinaryTree::find_leftmost(Node* start)
-{
-    // Получаем самый левый узел в текущем поддереве
-
-    while (start && start->left)
-        start = start->left;
-
-    return start;
+    // TODO: СѓРґР°Р»РёС‚СЊ РґСѓР±Р»РёРєР°С‚С‹
+    // РњРѕР¶РЅРѕ Рё РЅСѓР¶РЅРѕ Р·Р°РґРµР№СЃС‚РІРѕРІР°С‚СЊ delete_node
 }
 
 bool IntBinaryTree::delete_node(Node** node, int value)
 {
-    if (!(*node))
-    {
-        // Не нашли value
-        return false;
-    }
-
-    bool removed = false;
-
-    if (value == (*node)->value)
-    {
-        // Нашли value!
-
-        Node* n = *node;
-
-        if (!n->left)
-        {
-            // Нету левого потомка => на текущий узел устанавливаем правого потомка
-            // и удаляем узел, который был раньше на данном месте
-            *node = n->right;
-            delete n;
-        }
-        else if (!n->right)
-        {
-            // То же самое, что и для отсутствия левого потомка, только тут нет правого
-            *node = n->left;
-            delete n;
-        }
-        else
-        {
-            // Есть 2 потомка, поэтому берем самый левый узел из правого потомка =>
-            // гарантия, что дерево восстановится (этот метод взят из какой-то книжки по информатике)
-
-            Node* leftmost = find_leftmost((*node)->right);
-
-            // Сохраняем его значение
-            n->value = leftmost->value;
-
-            // Удаляем leftmost узел из правого потомка
-            delete_node(&n->right, leftmost->value);
-        }
-
-        removed = true;
-    }
-    else
-    {
-        // Ищем в дереве нужное нам значение (так же как производили вставку)
-
-        if (value < (*node)->value)
-            removed = delete_node(&(*node)->left, value);
-        else
-            removed = delete_node(&(*node)->right, value);
-    }
-
-    return removed;
+    // TODO: РёСЃРєР°С‚СЊ СѓР·Р»С‹ СЃ value, С‡С‚РѕР±С‹ СѓРґР°Р»РёС‚СЊ, РЅР°С‡РёРЅР°СЏ СЃ node, Рё
+    // РІРµСЂРЅСѓС‚СЊ true, РµСЃР»Рё С‡С‚Рѕ-С‚Рѕ СѓРґР°Р»РёР»Рё
 }
 
 void IntBinaryTree::remove(Node*& node, int value)
 {
-    // Пытаемся удалить, пока value в дереве существует
+    // TODO: СѓРґР°Р»РёС‚СЊ РІСЃРµ СѓР·Р»С‹ СЃ value
     while (delete_node(&node, value));
 }

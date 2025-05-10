@@ -3,7 +3,6 @@
 
 #include <iostream>
 
-// Главный класс (является и узлом, и деревом)
 class IntBinaryTree
 {
 public:
@@ -48,11 +47,10 @@ public:
     Node* root = nullptr;
 
 private:
-    bool print_level(Node* node, size_t level); // для traverse_levels
-    void remove_duplicates_impl(Node* node); // для remove_duplicates
+    bool print_level(Node* node, size_t level); // РґР»СЏ traverse_levels
+    void remove_duplicates_impl(Node* node); // РґР»СЏ remove_duplicates
 
-    Node* find_leftmost(Node* start); // для delete_node
-    bool delete_node(Node** node, int value); // для remove и remove_duplicates
+    bool delete_node(Node** node, int value); // РґР»СЏ remove РІ remove_duplicates
 
 };
 
