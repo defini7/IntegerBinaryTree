@@ -7,8 +7,9 @@
 class IntBinaryTree
 {
 public:
-    struct Node
+    class Node
     {
+    public:
         Node(int value, Node* left = nullptr, Node* right = nullptr);
 
         int value;
