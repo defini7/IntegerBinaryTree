@@ -34,6 +34,12 @@ int main()
         std::cout << std::endl;
         //print_sorted(t.root);
         t.print();
+        std::cout << std::endl << "--------" << std::endl;
+        
+        // Копирование
+        
+        IntBinaryTree t1 = t;
+        t.print();
         std::cout << std::endl << std::endl;
 
         // Обход по уровням

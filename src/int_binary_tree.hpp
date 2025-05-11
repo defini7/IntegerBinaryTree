@@ -17,8 +17,6 @@ public:
         Node* right = nullptr;
     };
 
-    static constexpr size_t INDENTATION_SPACES = 5;
-
 public:
     IntBinaryTree() = default;
     IntBinaryTree(const IntBinaryTree& tree);
@@ -65,6 +63,10 @@ private:
     void traverse_preorder_impl(Node* node);
     void traverse_inorder_impl(Node* node);
     void traverse_postorder_impl(Node* node);
+
+    void clear_impl(Node* node);
+    void copy_impl(Node* src, Node* dst);
+
 };
 
 #endif

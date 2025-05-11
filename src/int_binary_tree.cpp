@@ -10,7 +10,7 @@ IntBinaryTree::Node::Node(int value, Node* left, Node* right)
 
 IntBinaryTree::IntBinaryTree(const IntBinaryTree& tree)
 {
-    // TODO: скопировать дерево из tree в this (вызвать copy)
+    copy(tree);
 }
 
 IntBinaryTree::~IntBinaryTree()
@@ -20,7 +20,7 @@ IntBinaryTree::~IntBinaryTree()
 
 IntBinaryTree& IntBinaryTree::operator=(const IntBinaryTree& rhs)
 {
-    // TODO: скопировать из rhs в this (вызвать copy)
+    copy(rhs);
     return *this;
 }
 
@@ -55,7 +55,7 @@ void IntBinaryTree::print()
 
 void IntBinaryTree::clear()
 {
-    // TODO: удалить все узлы
+    clear_impl(root);
 }
 
 void IntBinaryTree::traverse_preorder()
@@ -88,7 +88,8 @@ void IntBinaryTree::traverse_levels()
 
 void IntBinaryTree::copy(const IntBinaryTree& tree)
 {
-    // TODO: скопировать из tree в this
+    clear();
+    copy_impl(tree.root, this->root);
 }
 
 size_t IntBinaryTree::get_height()
@@ -258,6 +259,28 @@ void IntBinaryTree::traverse_postorder_impl(Node* node)
         traverse_postorder_impl(node->right);
         std::cout << node->value << ' ';
     }
+}
+
+void IntBinaryTree::clear_impl(Node* node)
+{
+    if (!node)
+        return;
+
+    clear_impl(node->left);
+    clear_impl(node->right);
+
+    delete node;
+}
+
+void IntBinaryTree::copy_impl(Node* src, Node* dst)
+{
+    if (!src)
+        return;
+
+    dst = new Node(src->value);
+
+    copy_impl(src->left, dst->left);
+    copy_impl(src->right, dst->right);
 }
 
 void IntBinaryTree::remove(Node*& node, int value)
