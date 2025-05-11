@@ -60,17 +60,17 @@ void IntBinaryTree::clear()
 
 void IntBinaryTree::traverse_preorder()
 {
-    // TODO: предварительный обход
+    traverse_preorder_impl(root);
 }
 
 void IntBinaryTree::traverse_inorder()
 {
-    // TODO: порядковый обход
+    traverse_inorder_impl(root);
 }
 
 void IntBinaryTree::traverse_postorder()
 {
-    // TODO: отложенный обход
+    traverse_postorder_impl(root);
 }
 
 void IntBinaryTree::remove(int value)
@@ -228,6 +228,36 @@ void IntBinaryTree::print_helper(Node* node, int level)
     std::cout << node->value << std::endl;
 
     print_helper(node->left, level + 1);
+}
+
+void IntBinaryTree::traverse_preorder_impl(Node* node)
+{
+    if (node != NULL)
+    {
+        std::cout << node->value << ' ';
+        traverse_preorder_impl(node->left);
+        traverse_preorder_impl(node->right);
+    }
+}
+
+void IntBinaryTree::traverse_inorder_impl(Node* node)
+{
+    if (node != nullptr)
+    {
+        traverse_inorder_impl(node->left);
+        std::cout << node->value << ' ';
+        traverse_inorder_impl(node->right);
+    }
+}
+
+void IntBinaryTree::traverse_postorder_impl(Node* node)
+{
+    if (node != NULL)
+    {
+        traverse_postorder_impl(node->left);
+        traverse_postorder_impl(node->right);
+        std::cout << node->value << ' ';
+    }
 }
 
 void IntBinaryTree::remove(Node*& node, int value)

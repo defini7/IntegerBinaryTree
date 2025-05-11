@@ -3,16 +3,6 @@
 #include <random>
 #include <chrono>
 
-void print_sorted(IntBinaryTree::Node* node)
-{
-    if (!node)
-        return;
-
-    print_sorted(node->left);
-    std::cout << node->value << ' ';
-    print_sorted(node->right);
-}
-
 int main()
 {
     // TODO: Тестирование и демонстрация написанных вами методов
@@ -57,7 +47,7 @@ int main()
         std::cout << "Удаление дубликатов:\n";
         t.remove_duplicates();
 
-        print_sorted(t.root);
+        t.traverse_inorder();
         std::cout << std::endl << std::endl;
 
         // Удаление элемента
@@ -67,7 +57,7 @@ int main()
         std::cout << "Удаление элемента " << removed_value << std::endl;
         t.remove(removed_value);
 
-        print_sorted(t.root);
+        t.traverse_inorder();
         std::cout << std::endl << std::endl;
     }
 }

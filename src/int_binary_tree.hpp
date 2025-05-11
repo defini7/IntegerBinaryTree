@@ -58,12 +58,13 @@ private:
     // Для remove и remove_duplicates
     bool delete_node(Node** node, int value); 
 
-    // Для remove_duplicates
     void remove_duplicates_impl(Node* node);
 
-    // Для print
     void print_helper(Node* node, int level);
 
+    void traverse_preorder_impl(Node* node);
+    void traverse_inorder_impl(Node* node);
+    void traverse_postorder_impl(Node* node);
 };
 
 #endif
