@@ -65,7 +65,7 @@ private:
     void traverse_postorder_impl(Node* node);
 
     void clear_impl(Node* node);
-    void copy_impl(Node* src, Node* dst);
+    void copy_impl(Node* src, Node** dst);
 
 };
 

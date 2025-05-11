@@ -39,7 +39,8 @@ int main()
         // Копирование
         
         IntBinaryTree t1 = t;
-        t.print();
+        
+        t1.print();
         std::cout << std::endl << std::endl;
 
         // Обход по уровням
