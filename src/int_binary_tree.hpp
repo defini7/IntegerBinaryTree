@@ -1,4 +1,4 @@
-#ifndef BINARY_TREE_HPP
+﻿#ifndef BINARY_TREE_HPP
 #define BINARY_TREE_HPP
 
 #include <iostream>
@@ -49,10 +49,19 @@ public:
     Node* root = nullptr;
 
 private:
-    bool print_level(Node* node, size_t level); // для traverse_levels
-    void remove_duplicates_impl(Node* node); // для remove_duplicates
+    // Для traverse_levels
+    bool print_level(Node* node, size_t level); 
 
-    bool delete_node(Node** node, int value); // для remove в remove_duplicates
+    // Для delete_node
+    Node* find_leftmost(Node* start); 
+    
+    // Для remove и remove_duplicates
+    bool delete_node(Node** node, int value); 
+
+    // Для remove_duplicates
+    void remove_duplicates_impl(Node* node);
+
+    // Для print
     void print_helper(Node* node, int level);
 
 };
