@@ -81,9 +81,13 @@ void IntBinaryTree::remove(int value)
 void IntBinaryTree::traverse_levels()
 {
     size_t l = 1;
+    size_t elements_count = 0;
 
-    while (print_level(root, l++))
-        std::cout << '\n';
+    while (print_level(root, l++, elements_count))
+    {
+        std::cout << "- " << elements_count << std::endl;
+        elements_count = 0;
+    }
 }
 
 void IntBinaryTree::copy(const IntBinaryTree& tree)
@@ -120,7 +124,7 @@ void IntBinaryTree::traverse_increment()
     traverse_increment_impl(root);
 }
 
-bool IntBinaryTree::print_level(Node* node, size_t level) const
+bool IntBinaryTree::print_level(Node* node, size_t level, size_t& elements_count) const
 {
     if (!node)
         return false;
@@ -128,11 +132,12 @@ bool IntBinaryTree::print_level(Node* node, size_t level) const
     if (level == 1)
     {
         std::cout << node->value << ' ';
+        elements_count++;
         return true;
     }
 
-    bool left = print_level(node->left, level - 1);
-    bool right = print_level(node->right, level - 1);
+    bool left = print_level(node->left, level - 1, elements_count);
+    bool right = print_level(node->right, level - 1, elements_count);
     
     return left || right;
 }

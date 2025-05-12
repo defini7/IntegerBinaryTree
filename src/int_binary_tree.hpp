@@ -52,7 +52,7 @@ public:
 
 private:
     // Для traverse_levels
-    bool print_level(Node* node, size_t level) const; 
+    bool print_level(Node* node, size_t level, size_t& elements_count) const; 
 
     // Для delete_node
     static Node* find_leftmost(Node* start); 
