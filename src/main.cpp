@@ -5,13 +5,11 @@
 
 int main()
 {
-    // TODO: Тестирование и демонстрация написанных вами методов
-
     setlocale(LC_ALL, "ru");
 
     // Случайные тесты
 
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 10; i++)
     {
         std::cout << "Тест №" << i + 1 << "\n\n";
 
@@ -32,16 +30,15 @@ int main()
         }
 
         std::cout << std::endl;
-        //print_sorted(t.root);
         t.print();
         std::cout << std::endl << "--------" << std::endl;
         
-        // Копирование
+        // Копирование + инкремента + оператор <<
         
         IntBinaryTree t1 = t;
         
-        t1.print();
-        std::cout << std::endl << std::endl;
+        t1++; ++t1;
+        std::cout << t1 << std::endl << std::endl;
 
         // Обход по уровням
 
@@ -57,6 +54,10 @@ int main()
         t.traverse_inorder();
         std::cout << std::endl << std::endl;
 
+        // Высота
+
+        std::cout << "Высота: " << t.get_height() << std::endl;
+
         // Удаление элемента
 
         int removed_value = dist(mt);
@@ -67,4 +68,6 @@ int main()
         t.traverse_inorder();
         std::cout << std::endl << std::endl;
     }
+
+    return 0;
 }

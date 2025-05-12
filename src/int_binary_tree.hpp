@@ -25,7 +25,7 @@ public:
     IntBinaryTree& operator=(const IntBinaryTree& rhs);
 
     void push(int value);
-    void print();
+    void print(std::ostream& os = std::cout) const;
     void clear();
     
     void traverse_preorder();
@@ -43,29 +43,37 @@ public:
     IntBinaryTree operator++(int);
     IntBinaryTree& operator++();
 
+    friend std::ostream& operator<<(std::ostream& os, const IntBinaryTree& tree);
+
+    void traverse_increment();
+
 public:
     Node* root = nullptr;
 
 private:
     // Для traverse_levels
-    bool print_level(Node* node, size_t level); 
+    bool print_level(Node* node, size_t level) const; 
 
     // Для delete_node
-    Node* find_leftmost(Node* start); 
+    static Node* find_leftmost(Node* start); 
     
     // Для remove и remove_duplicates
     bool delete_node(Node** node, int value); 
 
     void remove_duplicates_impl(Node* node);
 
-    void print_helper(Node* node, int level);
+    void print_helper(std::ostream& os, Node* node, int level) const;
 
-    void traverse_preorder_impl(Node* node);
-    void traverse_inorder_impl(Node* node);
-    void traverse_postorder_impl(Node* node);
+    void traverse_preorder_impl(Node* node) const;
+    void traverse_inorder_impl(Node* node) const;
+    void traverse_postorder_impl(Node* node) const;
 
     void clear_impl(Node* node);
-    void copy_impl(Node* src, Node** dst);
+    void copy_impl(Node* src, Node*& dst);
+
+    size_t calculate_height(Node* node) const;
+
+    void traverse_increment_impl(Node* node) const;
 
 };
 
