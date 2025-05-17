@@ -18,7 +18,8 @@ void usage()
     std::cout << "\tcopy - копирует все элементы из текущего дерева в оставшееся\n";
     std::cout << "\theight - выводит высоту текущего дерева\n";
     std::cout << "\tincrement - увеличивает все значения в текущем дереве на 1\n";
-    std::cout << "\texit - выйти из программы" << std::endl;
+    std::cout << "\texit - выйти из программы\n";
+    std::cout << "\tclear - очищает консоль\n";
     std::cout << "\tusage - выводит это" << std::endl;
 }
 
@@ -41,16 +42,13 @@ int main()
 
         std::string cmd[2];
 
-        size_t i;
-        for (i = 0; i < s.length() && s[i] != ' '; i++)
-            cmd[0].append(1, s[i]);
-
-        if (s[i] == ' ') i++;
-
-        if (i != s.length())
+        size_t j = 0;
+        for (size_t i = 0; i < s.length(); i++)
         {
-            for (; i < s.length(); i++)
-                cmd[1].append(1, s[i]);
+            if (s[i] == ' ')
+                j++;
+            else
+                cmd[j].append(1, s[i]);
         }
 
         if (cmd[0] == "push")
@@ -97,6 +95,10 @@ int main()
             usage();
         else if (cmd[0] == "exit")
             break;
+        else if (cmd[0] == "clear")
+            system("cls"); // WIN32
+        else
+            std::cout << "Неизвестная команда" << std::endl;
     }
 
     return 0;
