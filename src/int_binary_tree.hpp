@@ -47,9 +47,6 @@ public:
 
     void traverse_increment();
 
-public:
-    Node* root = nullptr;
-
 private:
     // Для traverse_levels
     bool print_level(Node* node, size_t level, size_t& elements_count) const; 
@@ -68,12 +65,15 @@ private:
     void traverse_inorder_impl(Node* node) const;
     void traverse_postorder_impl(Node* node) const;
 
-    void clear_impl(Node* node);
+    void clear_impl(Node*& node);
     void copy_impl(Node* src, Node*& dst);
 
     size_t calculate_height(Node* node) const;
 
     void traverse_increment_impl(Node* node) const;
+
+private:
+    Node* m_root = nullptr;
 
 };
 

@@ -26,13 +26,13 @@ IntBinaryTree& IntBinaryTree::operator=(const IntBinaryTree& rhs)
 
 void IntBinaryTree::push(int value)
 {
-    if (!root)
+    if (!m_root)
     {
-        root = new Node(value);
+        m_root = new Node(value);
         return;
     }
 
-    Node* node = root;
+    Node* node = m_root;
 
     while (node)
     {
@@ -50,32 +50,35 @@ void IntBinaryTree::push(int value)
 
 void IntBinaryTree::print(std::ostream& os) const
 {
-    print_helper(os, root, 0);
+    print_helper(os, m_root, 0);
 }
 
 void IntBinaryTree::clear()
 {
-    clear_impl(root);
+    clear_impl(m_root);
 }
 
 void IntBinaryTree::traverse_preorder()
 {
-    traverse_preorder_impl(root);
+    traverse_preorder_impl(m_root);
+    std::cout << std::endl;
 }
 
 void IntBinaryTree::traverse_inorder()
 {
-    traverse_inorder_impl(root);
+    traverse_inorder_impl(m_root);
+    std::cout << std::endl;
 }
 
 void IntBinaryTree::traverse_postorder()
 {
-    traverse_postorder_impl(root);
+    traverse_postorder_impl(m_root);
+    std::cout << std::endl;
 }
 
 void IntBinaryTree::remove(int value)
 {
-    remove(root, value);
+    remove(m_root, value);
 }
 
 void IntBinaryTree::traverse_levels()
@@ -83,7 +86,7 @@ void IntBinaryTree::traverse_levels()
     size_t l = 1;
     size_t elements_count = 0;
 
-    while (print_level(root, l++, elements_count))
+    while (print_level(m_root, l++, elements_count))
     {
         std::cout << "- " << elements_count << std::endl;
         elements_count = 0;
@@ -93,17 +96,17 @@ void IntBinaryTree::traverse_levels()
 void IntBinaryTree::copy(const IntBinaryTree& tree)
 {
     clear();
-    copy_impl(tree.root, root);
+    copy_impl(tree.m_root, m_root);
 }
 
 size_t IntBinaryTree::get_height()
 {
-    return calculate_height(root);
+    return calculate_height(m_root);
 }
 
 void IntBinaryTree::remove_duplicates()
 {
-    remove_duplicates_impl(root);
+    remove_duplicates_impl(m_root);
 }
 
 IntBinaryTree IntBinaryTree::operator++(int)
@@ -121,7 +124,7 @@ IntBinaryTree& IntBinaryTree::operator++()
 
 void IntBinaryTree::traverse_increment()
 {
-    traverse_increment_impl(root);
+    traverse_increment_impl(m_root);
 }
 
 bool IntBinaryTree::print_level(Node* node, size_t level, size_t& elements_count) const
@@ -271,7 +274,7 @@ void IntBinaryTree::traverse_postorder_impl(Node* node) const
     }
 }
 
-void IntBinaryTree::clear_impl(Node* node)
+void IntBinaryTree::clear_impl(Node*& node)
 {
     if (!node)
         return;
