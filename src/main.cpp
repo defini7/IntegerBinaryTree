@@ -9,7 +9,7 @@
 void usage()
 {
     std::cout << "Существует 2 дерева, все операции выполняются на выбранном:\n";
-    std::cout << "\tinsert [#] - вставляет значение в дерево\n";
+    std::cout << "\tpush [#] - вставляет значение в дерево\n";
     std::cout << "\tprint - выводит дерево в горизонтальном виде\n";
     std::cout << "\tclear - полностью очищает дерево\n";
     std::cout << "\ttraverse [preorder | inorder | postorder | levels] - обходит дерево предварительно, порядково, отложенно или по уровням\n";
@@ -96,7 +96,13 @@ int main()
         else if (cmd[0] == "exit")
             break;
         else if (cmd[0] == "clear")
-            system("cls"); // WIN32
+        {
+            #ifdef _WIN32
+            system("cls");
+            #else
+            system("clear");
+            #endif
+        }
         else
             std::cout << "Неизвестная команда" << std::endl;
     }
