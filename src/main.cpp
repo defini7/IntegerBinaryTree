@@ -32,6 +32,8 @@ int main()
 
     std::mt19937 mt(std::chrono::system_clock::now().time_since_epoch().count());
     std::uniform_int_distribution<> dist(0, 10);
+
+    usage();
     
     while (true)
     {
