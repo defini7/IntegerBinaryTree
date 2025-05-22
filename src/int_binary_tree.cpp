@@ -50,7 +50,7 @@ void IntBinaryTree::push(int value)
 
 void IntBinaryTree::print(std::ostream& os) const
 {
-    print_helper(os, m_root, 0);
+    print_helper(os, m_root, 0, "", false);
 }
 
 void IntBinaryTree::clear()
@@ -229,19 +229,25 @@ bool IntBinaryTree::delete_node(Node** node, int value)
     return removed;
 }
 
-void IntBinaryTree::print_helper(std::ostream& os, Node* node, int level) const
+void IntBinaryTree::print_helper(std::ostream& os, Node* node, int level, const std::string& prefix, bool is_left) const
 {
     if (!node) return;
 
-    print_helper(os, node->right, level + 1);
-
-    for (int i = 0; i < level; ++i)
-    {
-        os << "    ";
+    if (node->right) {
+        print_helper(os, node->right, level + 1, prefix + "    ", false);
     }
-    os << node->value << std::endl;
 
-    print_helper(os, node->left, level + 1);
+    os << prefix;
+    if (level == 0) {
+        os << node->value << std::endl;
+    }
+    else {
+        os << "|--" << node->value << std::endl;
+    }
+
+    if (node->left) {
+        print_helper(os, node->left, level + 1, prefix + "    ", true);
+    }
 }
 
 void IntBinaryTree::traverse_preorder_impl(Node* node) const
