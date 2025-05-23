@@ -19,7 +19,7 @@ void usage()
     std::cout << "\theight - выводит высоту текущего дерева\n";
     std::cout << "\tincrement - увеличивает все значения в текущем дереве на 1\n";
     std::cout << "\texit - выйти из программы\n";
-    std::cout << "\tclear - очищает консоль\n";
+    std::cout << "\tcls - очищает консоль\n";
     std::cout << "\tusage - выводит это" << std::endl;
 }
 
@@ -97,7 +97,7 @@ int main()
             usage();
         else if (cmd[0] == "exit")
             break;
-        else if (cmd[0] == "clear")
+        else if (cmd[0] == "cls")
         {
             #ifdef _WIN32
             system("cls");

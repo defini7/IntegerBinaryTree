@@ -59,7 +59,7 @@ private:
 
     void remove_duplicates_impl(Node* node);
 
-    void print_helper(std::ostream& os, Node* node, int level, const std::string& prefix, bool is_left) const;
+    void print_helper(std::ostream& os, Node* node, int level, const std::string& prefix) const;
 
     void traverse_preorder_impl(Node* node) const;
     void traverse_inorder_impl(Node* node) const;
